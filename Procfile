@@ -1,1 +1,1 @@
-web: gunicorn app:supereasypa
+web: gunicorn supereasypa:app
