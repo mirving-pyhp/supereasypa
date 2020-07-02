@@ -1,1 +1,1 @@
-web: gunicorn supereasypa:app
+web: gunicorn __init__:app
