@@ -1,1 +1,1 @@
-web: gunicorn -w 4 -b 0.0.0.0:$PORT -k gevent supereasypa/supereasypa:app
+web: gunicorn supereasypa/supereasypa:app
