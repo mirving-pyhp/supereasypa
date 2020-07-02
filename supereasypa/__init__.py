@@ -4,8 +4,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
-
-app = Flask(__name__)
+from supereasypa import app
 
 app.config['SECRET_KEY'] = 'mysecret'
 
