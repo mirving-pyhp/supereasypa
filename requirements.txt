@@ -17,7 +17,6 @@ click==6.7
 colorama==0.4.3
 cssselect2==0.3.0
 csvalidate==1.1.1
-cv==1.0.0
 dash==1.11.0
 dash-core-components==1.9.1
 dash-html-components==1.0.3
