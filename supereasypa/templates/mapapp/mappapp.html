@@ -1,0 +1,210 @@
+{% extends "core/base.html" %}
+{% block content %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+	
+        <div class="container-fluid">
+          <!-- Page Heading -->          
+          <div class="d-sm-flex align-items-center justify-content-between mb-4 text-success text-center">
+            <h1 class="h3 mb-0 text-success text-center"><strong>EZMAP{{mapapp_record.id}}</strong></h1>
+            <div class="d-inline-block">
+				<button class="btn btn-primary">
+				<i class="fa fa-fax fa-1x" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-primary">
+				<a href="#" class="text-light"><i class="fa fa-file-alt fa-1x" aria-hidden="true"></i></a>
+				</button>
+			  
+			  
+			  </div>
+			
+			</div>
+
+          <!-- Content Row -->
+          <div class="row">
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><strong>Patient</strong></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a class="text-dark" href="#">{{ mapapp_record.patient }}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-user fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Drug</div>
+                      <div class="h5 mb-0 font-weight-bold "><a class="text-dark" href="#">{{ mapapp_record.drug_name }}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-pills fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card {{ border_style }} shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold {{ header_font }} text-uppercase mb-1"> Status</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><a class="text-dark" href="#">{{ mapapp_record.status }}</a></div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="col-auto"><em class="fas {{ icon }} fa-2x {{ header_font }}"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Doctor</div>
+                      <div class="h6 mb-0 font-weight-bold text-dark">{{ md_info }}</div>
+                      <div class="h6 mb-0 font-weight-bold text-primary"></div>
+                    </div>
+                    <div class="col-auto"><em class="fas fa-user-md fa-2x text-primary"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Info</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+                      <div class="dropdown-header">Actions:</div>
+                      <a href="#">Edit</a>
+					  
+					  
+					   <hr>
+					 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                
+                    <ul class="list-group">
+                      <li class="list-group-item text-dark"><strong>MAP Name</strong>: <strong class="text-primary">{{ mapapp_record.map_name }}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Phone</strong>: <strong class="text-primary">{{ mapapp_record.phone }}</strong></li>
+
+                      <br>
+
+                    </ul>
+       
+                </div>
+              </div>
+            </div>
+          <div class="modal" tabindex="-1" role="dialog" id="notes_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p class="text-success">Add Notes</p>
+
+				  <form method="POST">
+					<!-- add notes here-->
+				  </form>
+				</div>
+				<div class="modal-footer">
+
+
+				</div>
+			  </div>
+			</div>
+		  </div>
+              <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Notes</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body " style="overflow-y:scroll;">
+				<div class="chart-area">
+				<!-- add notes here-->
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="#" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+            <!-- Pie Chart -->
+            
+
+          <!-- Content Row -->
+        </div>
+        <!-- /.container-fluid -->
+		
+{% endblock %}

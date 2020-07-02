@@ -1,0 +1,59 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5" style="height: 100%;">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="text-center text-success">
+                            Manufacturer/Patient Assistance Program</h2>
+                            <div class="text-center">
+                                <i class="fa fa-pills fa-3x text-success"></i>
+             
+                    </div>
+                        <form method="POST">
+                            {{ form.hidden_tag() }}
+                        <br/>
+                           {{ form.name.label }} {{ form.name(class_="form-control") }}
+                        <br/>
+                         {{ form.phone.label }} {{ form.phone(class_="form-control") }}
+                        <br/>
+                         {{ form.fax.label }} {{ form.fax(class_="form-control") }}
+                        <br/>
+                            <p>Drug</p>
+
+                            <select data-max-options="1" class="selectpicker" data-width="100%" data-live-search="true"
+                                     data-style="btn-success text-light" multiple title="Select a Drug." name="drug_id" id="drug_id" >
+                               <option value="{{ drug_name_pull.id }}">{{ drug_name }}</option>
+                                {% for drug in all_drugs.items %}
+                                <option value="{{ drug.id }}">{{ drug.name }} {{ drug.strength }} {{ drug.dosage_form }}</option>
+                                {% endfor %}
+
+                            </select>
+                        <br/><br/>
+                        {{ form.manufacturer.label }} {{ form.manufacturer(class_="form-control") }}
+                        <br/>
+                        {{ form.required_docs.label }} {{ form.required_docs(class_="form-control") }}
+                        <br/>
+                        {{ form.income_threshold.label }} {{ form.income_threshold(class_="form-control") }}
+                        <br/>
+                        {{ form.household_size.label }} {{ form.household_size(class_="form-control") }}
+                        <br/>
+
+
+                            {{ form.submit(class_="btn btn-success") }}
+                        </form>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

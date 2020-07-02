@@ -1,0 +1,449 @@
+{% extends "core/base.html" %}
+{% block content %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+	
+        <div class="container-fluid">
+          <!-- Page Heading -->          
+          <div class="d-sm-flex align-items-center justify-content-between mb-4 text-success text-center">
+            <h1 class="h3 mb-0 text-success text-center"><strong>&nbsp;{{map_record.name}}</strong></h1>
+            <div class="d-inline-block">
+				<button class="btn btn-primary">
+				<i class="fa fa-fax fa-1x" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-primary">
+				<a href="#" class="text-light"><i class="fa fa-file-alt fa-1x" aria-hidden="true"></i></a>
+				</button>
+			  
+			  
+			  </div>
+			
+			</div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><strong>No of Apps</strong></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a class="text-dark" href="#">{{ total }}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Approved</div>
+                      <div class="h5 mb-0 font-weight-bold "><a class="text-dark" href="#">{{ approved }}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-check fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1"> Denied</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><a class="text-dark" href="#">{{ denied }}</a></div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="col-auto"><em class="fas fa-times fa-2x text-danger"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Pending</div>
+                      <div class="h6 mb-0 font-weight-bold text-dark">{{ pending }}</div>
+                      <div class="h6 mb-0 font-weight-bold text-warning"></div>
+                    </div>
+                    <div class="col-auto"><em class="fas fa-clock fa-2x text-warning"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Info</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+                      <div class="dropdown-header">Actions:</div>
+                      <a href="{{ url_for('map.update', map_id=map_record.id) }}">Edit</a>
+					  
+					  
+					   <hr>
+					 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                
+                    <ul class="list-group">
+                      <li class="list-group-item text-dark"><strong>Drug Name</strong>: <strong class="text-primary"><a href="{{ url_for('drug.viewdrug',drug_id=map_record.drug_id) }}">{{ drug_name_current.name }}</a> </strong></li>
+                      <li class="list-group-item text-dark"><strong>Manufacturer</strong>: <strong class="text-primary">{{ map_record.manufacturer }}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Required Docs</strong>: <strong class="text-primary">{{ map_record.required_docs }}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Income Threshold</strong>: <strong class="text-primary">{{ map_record.income_threshold }}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Household Size</strong>: <strong class="text-primary">{{ map_record.household_size}}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Phone</strong>: <strong class="text-primary">{{ map_record.phone}}</strong></li>
+                      <li class="list-group-item text-dark"><strong>Fax</strong>: <strong class="text-primary">{{ map_record.fax}}</strong></li>
+                      <br>
+
+                    </ul>
+       
+                </div>
+              </div>
+            </div>
+          <div class="modal" tabindex="-1" role="dialog" id="notes_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p class="text-success">Add Notes</p>
+
+				  <form method="POST">
+					<!-- add notes here-->
+                      {{form_notes.hidden_tag() }}
+                    {{ form_notes.body.label }} {{ form_notes.body(class_="form-control") }}<br />
+                    {{ form_notes.submit(class_="btn btn-success") }}
+				  </form>
+				</div>
+				<div class="modal-footer">
+
+
+				</div>
+			  </div>
+			</div>
+		  </div>
+              <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Notes</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body " style="overflow-y:scroll;">
+				<div class="chart-area">
+				<!-- add notes here-->
+                    {% for note in notes_map %}
+                  <h6 class="text-primary">{{note.date_created.strftime('%m-%d-%Y %H:%M')}}</h6>
+                    <p>
+
+					{{ note.body }}
+
+					</p>
+				    <h6 class="text-success">By {{ note.created_by }}</h6>
+					<hr>
+			    {% endfor %}
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="{{ url_for('map.delete_map', map_id=map_record.id) }}" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+            <!-- Pie Chart -->
+            
+
+          <!-- Content Row -->
+        </div>
+            <div class="row">
+                <div class="col-sm-12 ">
+              <div class="card shadow mb-4 " >
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success" >
+                  <h6 class="m-0 font-weight-bold text-light">Approved</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body ">
+				<div >
+				<div class="table-responsive">
+            <table id="dataTable2" class="table table-bordered table-hover ">
+                <thead class="bg-light text-primary">
+                    <tr>
+                        <th>Pt Name</th>
+                        <th>Insurance</th>
+                        <th>Prescriber</th>
+                        <th>Date</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map in all_approved%}
+                    <tr style="background-color: #fff;">
+
+                        <td><a href="{{ url_for('mapapp.viewmapapp', mapapp_id = map.id) }}">{{map.patient}}</td></a></td>
+                        <td>{{map.ins_name}}</td>
+                        <td>{{map.prescriber}}</td>
+                    <td>{{map.date_open.strftime('%m-%d-%Y')}}</td>
+
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="#" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+               <div class="col-sm-12 ">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Denied</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body">
+				<div>
+				<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-light text-primary">
+                    <tr>
+                        <th>Pt Name</th>
+                        <th>Insurance</th>
+                        <th>Prescriber</th>
+                        <th>Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map in all_denied%}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('mapapp.viewmapapp', mapapp_id = map.id) }}">{{map.patient}}</td></a></td>
+                        <td>{{map.ins_name}}</td>
+                        <td>{{map.prescriber}}</td>
+                    <td>{{map.date_open.strftime('%m-%d-%Y')}}</td>
+
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="#" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+               <div class="col-sm-12">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Pending</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body">
+				<div >
+				<div class="table-responsive">
+            <table id="dataTable3" class="table table-bordered table-hover ">
+                <thead class="bg-light text-primary">
+                    <tr>
+                        <th>Pt Name</th>
+                        <th>Insurance</th>
+                        <th>Prescriber</th>
+                        <th>Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                     {% for map in all_pending%}
+                    <td><a href="{{ url_for('mapapp.viewmapapp', mapapp_id = map.id) }}">{{map.patient}}</td></a></td>
+                        <td>{{map.ins_name}}</td>
+                        <td>{{map.prescriber}}</td>
+                    <td>{{map.date_open.strftime('%m-%d-%Y')}}</td>
+
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+
+
+        </div>
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="#" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+            </div>
+
+
+        <!-- /.container-fluid -->
+		
+{% endblock %}

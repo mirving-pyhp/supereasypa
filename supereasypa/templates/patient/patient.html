@@ -1,0 +1,485 @@
+{% extends "core/base.html" %}
+{% block content %}
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          
+          <div class="d-sm-flex align-items-center justify-content-between mb-4 text-success text-center">
+		  
+            <h1 class="h3 mb-0 text-success text-center"><strong>{{ patient_record.fname }} {{ patient_record.lname }}</strong> - <strong class="text-primary">{{ patient_record.member_id }}</strong></h1>
+            <div class="d-inline-block">
+				<button class="{{ style }}" data-toggle="tooltip" data-placement="top" title="Patient insurance {{ status_message }}">
+				<i class="{{ status_coverage }} fa-1x" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-primary">
+				<i class="fa fa-fax fa-1x" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-primary">
+				<a href="{{ url_for('patient.viewpatientdocs',patient_id=patient_record.id) }}" class="text-light"><i class="fa fa-file-alt fa-1x" aria-hidden="true"></i></a>
+				</button>
+			  
+			  
+			  </div>
+			
+			</div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><strong>Insurance</strong></div>
+                      <div class="h5 mb-0 font-weight-bold "><a class="text-gray-800" href="{{ url_for('insurance.viewinsurance', insurance_id=insurance_name.id) }}" >{{ insurance_name.name }}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1"> Pending Auths</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"> {{ allpending }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-clock fa-2x text-warning"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-danger shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-danger text-uppercase mb-1"> Denied Auths</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"> {{ alldenied }}</div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-times fa-2x text-danger"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Approved</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"> {{ allapproved }}</div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-check fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-sm-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Demographics</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+                      <div class="dropdown-header">Actions:</div>
+                      <a class="dropdown-item" href="{{ url_for('patient.update', patient_id=patient_record.id) }}" ><button class="btn btn-outline-success">Edit</button></a>
+                      <hr>
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+
+                    <ul class="list-group">
+						<li class="list-group-item"><strong class="text-primary">DOB:</strong> {{ patient_record.dob.strftime("%m/%d/%Y") }}</li>
+						<br>
+						<li class="list-group-item"><strong class="text-primary">Height:</strong> {{ patient_record.height }}</li>
+						<br>
+						<li class="list-group-item"><strong class="text-primary">Weight:</strong> {{ patient_record.weight }} </li>
+						<br>
+						<li class="list-group-item"><strong class="text-primary">Allergies:</strong> {{ patient_record.allergies }}</li>
+						<br>
+					</ul>
+                
+                </div>
+              </div>
+            </div>
+			<div class="col-sm-6 col-lg-6">
+              <div class="card shadow mb-4 ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 id="notes_area" class="m-0 font-weight-bold text-light">Notes</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+     
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Notes area -->
+                <div class="card-body " style="overflow-y:scroll;">
+				<div class="chart-area">
+				{% for note in notes_pt %}
+                  <h6 class="text-primary">{{note.date_created.strftime('%m-%d-%Y %H:%M')}}</h6>
+                    <p>
+					
+					{{ note.body }}
+					
+					</p>
+				    <h6 class="text-success">By {{ note.created_by }}</h6>
+					<hr>
+			    {% endfor %}
+                </div>
+                </div>
+              </div>
+            </div>
+
+           
+          </div>
+        <!-- add PA form modal -->
+        	  <div class="modal" tabindex="-1" role="dialog" id="pa_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <form method="POST">
+
+                            {{ form_pa.hidden_tag() }}
+                            <p>Drug</p>
+                            <select name="drug" id="drug" class="form-control">
+                                {% for drug in all_drugs %}
+                                <option value="{{ drug.name }}">{{ drug.name }}</option>
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            {{ form_pa.eff_date.label }} {{ form_pa.eff_date(class_="form-control") }}<br/>
+                            {{ form_pa.term_date.label }} {{ form_pa.term_date(class_="form-control") }}
+                            <br />
+                            <p>Prescriber</p>
+                            <select name="prescriber_id" id="prescriber_id" class="form-control">
+                                {% for doc in doctors %}
+                                <option value="{{ doc.id }}">{{ doc.fname }} {{ doc.lname }}</option>
+
+                                {% endfor %}
+                            </select>
+
+                            <br/>
+
+                           <p>Insurance</p>
+							 <select name="insurance_id" id="insurance_id" class="form-control">
+
+
+							<option value="{{ patient_record.ins_id }}">{{ insurance_name.name }}</option>
+
+							{% for ins in allins %}
+
+							<option value="{{ ins.id }}">{{ ins.name }}</option>
+
+							{% endfor %}
+							</select>
+                            <br />
+							<p>Patient</p>
+							<select class="form-control" id="patient_id" name="patient_id">
+
+							<option value="{{ patient_record.id }}">{{ patient_record.fname }} {{ patient_record.lname }} </option>
+
+							</select>
+                           <br/>
+							<p>Status</p>
+							<select class="form-control" name="status" id="status">
+
+								<option value="Approved">Approved</option>
+								<option value="Denied">Denied</option>
+								<option value="Pending">Pending</option>
+								<option value="Appeal">Appeal</option>
+								<option value="2nd Appeal">2nd Appeal</option>
+								<option value="3rd Party Review">3rd Party Review</option>
+
+							</select>
+
+							<br>
+							<p>Assigned To</p>
+                            <select class="form-control" id="user_id" name="user_id">
+
+
+
+								{% for user in all_users %}
+
+							<option value="{{ user.id }}">{{ user.username }} </option>
+
+								{% endfor %}
+							</select>
+							<br>
+
+
+                            {{ form_pa.notes_init.label }} {{ form_pa.notes_init(class_="form-control") }}<br>
+                            <br />
+                            {{ form_pa.submit(class_="btn btn-success") }}
+
+                        </form>
+				</div>
+				<div class="modal-footer">
+
+
+				</div>
+			  </div>
+			</div>
+		  </div>
+
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this patient?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<form action="{{ url_for('patient.delete_patient', patient_id=patient_record.id) }}" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				  
+				</div>
+			  </div>
+			</div>
+		  </div>
+		   <div class="modal" tabindex="-1" role="dialog" id="notes_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p class="text-success">Add Notes</p>
+				  
+				  <form method="POST">
+					{{form.hidden_tag() }}
+                    {{ form.body.label }} {{ form.body(class_="form-control") }}<br />
+                    {{ form.submit(class_="btn btn-success") }}
+				  </form>
+				</div>
+				<div class="modal-footer">
+					
+				  
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="row">
+		  <div class="col-sm-12 col-md-12 col-lg-12">
+			
+				 <!-- Prior authorizations area -->
+         
+              <div class="card shadow mb-4">
+
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Prior Authorizations</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Actions:</div>
+                      <a class="dropdown-item" href="{{ url_for('patient.printing_pa_list',patient_id=pt_id) }}">Export List</a>
+                      <a class="dropdown-item" href="#"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#pa_modal">Add PA</button></a>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+				<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-light text-primary">
+                    <tr>
+                        <th>ID</th>    
+                        <th>Drug</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+				
+                  {% for pa in prior_auths %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('priorauth.viewpa', priorauth_id=pa.id) }}">EZAUTH{{pa.id}}</a></td>
+                        <td>{{pa.drug}}</td>
+                        <td>{{pa.status}}</td>                    
+                        <td>{{pa.assigned_to}}</td>                    
+                       
+                        <td>{{pa.date_open.strftime('%m-%d-%Y')}}</td>
+                    </tr>
+                    {% endfor %}
+				
+            </table>
+			</div>
+                </div>
+              </div>
+           
+			</div>
+		  </div>
+            <div class="row">
+		  <div class="col-sm-12 col-md-12 col-lg-12">
+
+				 <!-- Prior authorizations area -->
+
+              <div class="card shadow mb-4">
+
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Patient Assistance Apps</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                      <div class="dropdown-header">Actions:</div>
+                      <a class="dropdown-item" href="{{ url_for('patient.printing_pa_list',patient_id=pt_id) }}">Export List</a>
+                      <a class="dropdown-item" href="#"><button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#pa_modal">Add PA</button></a>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+				<div class="table-responsive">
+            <table id="dataTable2" class="table table-bordered table-hover ">
+                <thead class="bg-light text-primary">
+                    <tr>
+                        <th>ID</th>
+                        <th>Program Name</th>
+                        <th>Drug</th>
+                        <th>Status</th>
+                        <th>Open</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  {% for map in all_mapapp %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('mapapp.viewmapapp',mapapp_id=map.id) }}">EZMAP{{map.id}}</a> </td>
+                        <td><a href="{{ url_for('map.viewmap',map_id=map.map_id) }}">{{map.map_name}}</a> </td>
+                        <td><a href="{{ url_for('drug.viewdrug',drug_id=map.drug_id) }}">{{map.drug_name}}</a> </td>
+                        <td>{{map.status}}</td>
+                        <td>{{map.date_open.strftime('%m-%d-%Y')}}</td>
+                    </tr>
+                    {% endfor %}
+            </table>
+			</div>
+                </div>
+              </div>
+
+			</div>
+		  </div>
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Content Column -->
+            <div class="col-lg-6 mb-4">
+
+              <!-- Project Card Example -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Insurance Info</h6>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group">
+					  <li class="list-group-item"><strong class="text-primary">Plan Name:</strong> {{ insurance_name.name }}</li>
+
+				    <li class="list-group-item"><strong class="text-primary">BIN:</strong> {{ insurance_name.bin }}</li>
+
+				    <li class="list-group-item"><strong class="text-primary">PCN:</strong> {{ insurance_name.pcn }}</li>
+
+					  <li class="list-group-item"><strong class="text-primary">Group:</strong> {{ insurance_name.group }}</li>
+
+					  <li class="list-group-item"><strong class="text-primary">ID:</strong> {{ patient_record.member_id }} </li>
+
+					  <li class="list-group-item"><strong class="text-primary">Effective:</strong> {{ patient_record.ins_eff_date.strftime("%m/%d/%Y") }}</li>
+
+					  <li class="list-group-item"><strong class="text-primary">Term:</strong> {{ patient_record.ins_term_date.strftime("%m/%d/%Y") }}</li>
+
+					
+				  </ul>
+                </div>
+              </div>
+
+           
+            </div>
+            <div class="col-lg-6 mb-4">
+             
+              <div class="card shadow mb-4">
+                <div class="card-header py-3 bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Prescriber(s)</h6>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group">
+
+                      {% for md in patient_md %}
+                          <li class="list-group-item text-primary"><h5><strong><a href="{{ url_for('prescriber.viewprescriber', prescriber_id=md.id) }}">
+                             {{ md.prescriber }}
+                          </a> </strong></span></h5></li>
+
+                        {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            
+            </div>
+            
+       
+</div>
+
+        </div>
+{% endblock %}

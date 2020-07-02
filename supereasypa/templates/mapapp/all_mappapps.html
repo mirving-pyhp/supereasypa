@@ -1,0 +1,42 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success">M.A.P Applications</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Drug</th>
+                        <th>Status</th>
+                        <th>Patient</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map in all_mapapp %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('mapapp.viewmapapp', mapapp_id=map.id) }}">EZMAP{{map.id}}</a> </td>
+                        <td><a href="{{ url_for('map.viewmap',map_id=map.map_id) }}">{{map.map_name}}</a> </td>
+                        <td><a href="{{ url_for('drug.viewdrug',drug_id=map.drug_id) }}">{{map.drug_name}}</a> </td>
+                        <td>{{map.status}}</td>
+                        <td><a href="{{ url_for('patient.viewpatient',patient_id=map.pt_id) }}">{{map.pt_info}}</a> </td>
+
+                    </tr>
+                    {% endfor %}
+                      
+                </tbody>
+				
+            </table>
+			
+
+        </div>
+
+		</div>
+	</div>
+   </div>   
+  <br/> 
+{% endblock %}

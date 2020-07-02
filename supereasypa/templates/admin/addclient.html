@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create a Client</h1>
+                        </div>
+                        <form class="user" method="POST">
+                            
+                            <div class="form-group row">
+                                {{ form.hidden_tag() }}
+                                {{ form.name.label }} {{ form.name(class_="form-control") }}<br>
+                                {{ form.phone.label }} {{ form.phone(class_="form-control") }}<br>
+                                {{ form.fax.label }} {{ form.fax(class_="form-control") }}<br>
+                                {{ form.sub_type.label }} {{ form.sub_type(class_="form-control") }}<br>
+								<br/>
+								
+                                {{ form.submit(class_="btn btn-success") }}
+                                
+                            </div>   
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="../user/forgot-password.html">Forgot Password?</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

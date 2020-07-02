@@ -1,0 +1,48 @@
+﻿{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                        </div>
+                        <form class="user" method="POST">
+                            
+                            <div class="form-group row">
+                                {{ form.hidden_tag() }}
+                                {{ form.email.label }} {{ form.email(class_="form-control") }}<br>
+                                {{ form.username.label }} {{ form.username(class_="form-control") }}<br>
+                                {{ form.fname.label }} {{ form.fname(class_="form-control") }}<br>
+                                {{ form.lname.label }} {{ form.lname(class_="form-control") }}<br>
+                                {{ form.password.label }} {{ form.password(class_="form-control") }}<br>
+                                {{ form.pass_confirm.label }} {{ form.pass_confirm(class_="form-control") }}<br>
+								<br/>
+								<p>Client</p>
+								<select name="client_id" id="client_id" class="form-control">
+									{% for client in allclients %}
+									<option value="{{ client.id }}">{{ client.name }}</option>
+									{% endfor %}
+								</select>
+									<br /><br/>
+                                {{ form.submit(class_="btn btn-success") }}
+                                
+                            </div>   
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a class="small" href="../user/forgot-password.html">Forgot Password?</a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

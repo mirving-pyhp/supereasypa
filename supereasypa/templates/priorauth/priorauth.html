@@ -1,0 +1,236 @@
+{% extends "core/base.html" %}
+{% block content %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+	
+        <div class="container-fluid">
+          <!-- Page Heading -->          
+          <div class="d-sm-flex align-items-center justify-content-between mb-4 text-success text-center">
+            <h1 class="h3 mb-0 text-success text-center"><strong>Prior Auth No:&nbsp;EZAUTH{{priorauth.id}}</strong></h1>
+            <div class="d-inline-block">
+
+
+
+				<button class="btn btn-primary">
+				<i class="fa fa-fax fa-1x" aria-hidden="true"></i>
+				</button>
+				<button class="btn btn-primary">
+				<a href="{{ url_for('priorauth.viewpriorauthdocs',priorauth_id=priorauth.id) }}" class="text-light"><i class="fa fa-file-alt fa-1x" aria-hidden="true"></i></a>
+				</button>
+			  
+			  
+			  </div>
+			
+			</div>
+
+          <!-- Content Row -->
+          <div class="row">
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><strong>Insurance</strong></div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800"><a class="text-dark" href="{{ url_for('insurance.viewinsurance', insurance_id=priorauth.ins_id) }}">{{priorauth.ins_name}}</a></div>
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-calendar fa-2x text-primary"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Patient name</div>
+                      <div class="h5 mb-0 font-weight-bold "><a class="text-dark" href="{{ url_for('patient.viewpatient', patient_id=priorauth.patient_id) }}">{{priorauth.patient}}</a></div>
+
+                    </div>
+                    <div class="col-auto">
+                      <i class="fas fa-user fa-2x text-success"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Earnings (Monthly) Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"> Doctor</div>
+                      <div class="row no-gutters align-items-center">
+                        <div class="col-auto">
+                          <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><a class="text-dark" href="{{url_for('prescriber.viewprescriber', prescriber_id=priorauth.prescriber_id)}}">{{priorauth.prescriber}}</a></div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                    <div class="col-auto"><em class="fas fa-user-md fa-2x text-primary"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pending Requests Card Example -->
+            <div class="col-xl-3 col-md-6 mb-4">
+              <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1"> Info</div>
+                      <div class="h6 mb-0 font-weight-bold text-dark">Effective: {{ eff_date }}</div>
+                      <div class="h6 mb-0 font-weight-bold text-danger">Term: {{ term_date }}</div>
+                        <a class="text-primary {{ disabled }}" href="{{ url_for('map.viewmap',map_id=map_id) }}"><strong>MAP: {{ map_available }}</strong></a>
+                    </div>
+                    <div class="col-auto"><em class="fas fa-info-circle fa-2x text-success"></em></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Row -->
+
+          <div class="row">
+
+            <!-- Area Chart -->
+            <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Info</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+                      <div class="dropdown-header">Actions:</div>
+                      <a href="{{ url_for('priorauth.update', priorauth_id=priorauth.id) }}">Edit</a>
+					  
+					  
+					   <hr>
+					 <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#del_modal">Delete</button>
+                      
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                
+                    <ul class="list-group">
+                      <li class="list-group-item text-dark"><strong>Drug Name</strong>: <strong class="text-primary">{{priorauth.drug}}</strong></li>
+                      <br>
+                      <li class="list-group-item text-dark"><strong>Date Open</strong>: <strong class="text-primary">{{priorauth.date_open.strftime('%m-%d-%Y')}}</strong></li>
+                      <br>
+                      <li class="list-group-item text-dark"><strong>Status</strong>: <strong class="text-primary">{{priorauth.status}}</strong> </li>
+                      
+						<br>
+						<li class="list-group-item text-dark"><strong>Assigned To</strong>: <strong class="text-primary">{{priorauth.assigned_to}}</strong> </li>
+
+						<br>
+						<li class="list-group-item text-dark"><strong>Initial Notes</strong>: <strong class="text-primary">{{priorauth.notes_init}}</strong> </li>
+                      
+						<br>
+					</ul>
+       
+                </div>
+              </div>
+            </div>
+          <div class="modal" tabindex="-1" role="dialog" id="notes_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p class="text-success">Add Notes</p>
+
+				  <form method="POST">
+					{{form_notes.hidden_tag() }}
+                    {{ form_notes.body.label }} {{ form_notes.body(class_="form-control") }}<br />
+                    {{ form_notes.submit(class_="btn btn-success") }}
+				  </form>
+				</div>
+				<div class="modal-footer">
+
+
+				</div>
+			  </div>
+			</div>
+		  </div>
+              <div class="col-xl-6 col-lg-6">
+              <div class="card shadow mb-4">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between text-light bg-success">
+                  <h6 class="m-0 font-weight-bold text-light">Notes</h6>
+                  <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-light"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink" style="padding: 15px;">
+
+					 &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#notes_modal">Add Notes</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- Card Body -->
+                   <div class="card-body " style="overflow-y:scroll;">
+				<div class="chart-area">
+				{% for note in notes_pa %}
+                  <h6 class="text-primary">{{note.date_created.strftime('%m-%d-%Y %H:%M')}}</h6>
+                    <p>
+
+					{{ note.body }}
+
+					</p>
+				    <h6 class="text-success">By {{ note.created_by }}</h6>
+					<hr>
+			    {% endfor %}
+                </div>
+                </div>
+              </div>
+            </div>
+		  <div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Are you sure you want to delete this prior authorization?</p>
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+				  <form action="{{ url_for('priorauth.delete_priorauth', priorauth_id=priorauth.id) }}" method="POST">
+					<input class="btn btn-danger" type="submit" value="Delete">
+				  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+            <!-- Pie Chart -->
+            
+
+          <!-- Content Row -->
+        </div>
+        <!-- /.container-fluid -->
+		
+{% endblock %}

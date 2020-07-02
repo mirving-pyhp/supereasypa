@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success">Prescribers</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>NPI</th>
+                        <th>Phone</th>
+                        <th>Fax</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for md in prescribers.items %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{url_for('prescriber.viewprescriber', prescriber_id=md.id)}}">{{md.fname}} {{ md.lname }}</a> </td>
+                        <td>{{md.npi}}</td>
+                        <td>{{md.phone}}</td>
+                        <td>{{md.fax}}</td>
+
+                    </tr>
+                    {% endfor %}
+                      
+                </tbody>
+				
+            </table>
+			
+
+        </div>
+
+		</div>
+	</div>
+   </div>   
+  <br/> 
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success"><a href="{{ url_for('insurance.viewinsurance', insurance_id=insurance.id) }}">{{ insurance.name }}</a>  Documents</h2>
+        <button type="button" class="d-none d-sm-inline-block btn btn-success shadow-sm" data-toggle="modal" data-target="#del_modal"><i class="fas fa-upload fa-1x text-light"></i></button>
+        <br/><br/>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Created By</th>
+                        <th>Uploaded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for doc in docs_module %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ doc.doc_path }}" download>{{doc.name}}</td></a></td>
+                        <td>{{doc.description}}</td>
+                        <td>{{doc.created_by}}</td>
+                        <td>{{doc.date_created.strftime('%m-%d-%Y')}}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+            
+
+        </div>
+
+		</div>
+	</div>
+	<div class="modal" tabindex="-1" role="dialog" id="del_modal">
+			<div class="modal-dialog" role="document">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <h5 class="modal-title">Super Easy PA</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
+				</div>
+				<div class="modal-body">
+				  <p>Add Documents</p>
+                    <form method="POST" enctype="multipart/form-data">
+					{{ form.hidden_tag() }}
+                      {{ form.name.label }} {{ form.name(class_="form-control") }}<br />
+                      {{ form.description.label }} {{ form.description(class_="form-control") }}<br />
+
+                      {{ form.file.label }} {{ form.file}}<br />
+
+
+				</div>
+				<div class="modal-footer">
+                        {{ form.submit(class_="btn btn-success") }}<br/><br/>
+                    </form>
+
+				</div>
+			  </div>
+			</div>
+		  </div>
+   </div>     
+   <br/>
+{% endblock %}

@@ -1,0 +1,113 @@
+﻿{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="text-center text-success">
+                            Prior Authorization</h2>
+                            <div class="text-center">
+                                <i class="fas fa-tasks fa-3x text-success"></i>
+             
+                    </div>
+                        <form method="POST">
+                           
+                            {{ form.hidden_tag() }}
+                        <br/>
+                        <p>Drug</p>
+                            <select class="form-control" name="drug" id="drug">
+
+                                <option value="{{ current_auth.drug }}">{{ current_drug  }}</option>
+                                {% for drug in all_drugs %}
+                                <option value="{{ drug.name }}">{{ drug.name }} {{ drug.strength }} {{ drug.dosage_form }}</option>
+
+                                {% endfor %}
+
+                            </select>
+                            <br />
+                        <p>Prescriber</p>
+
+                                <select name="prescriber_id" id="prescriber_id" class="form-control">
+                                     <option value="{{ current_auth.prescriber_id }}">{{ current_prescriber  }}</option>
+                                    {% for md in allmd %}
+                                    <option value="{{ md.id }}">{{ md.fname }} {{ md.lname }}</option>
+                                    {% endfor %}
+                                </select>
+
+                            <br />
+                           <p>Insurance</p>
+							 <select name="insurance_id" id="insurance_id" class="form-control">
+							
+
+							<option value="{{ current_auth.ins_id }}">{{ current_ins }}</option>
+				
+							{% for ins in allins %}
+
+							<option value="{{ ins.id }}">{{ ins.name }}</option>
+
+							{% endfor %}
+							</select>
+                            <br />
+                            {{ form.eff_date.label }} {{ form.eff_date(class_="form-control") }}<br/>
+                            {{ form.term_date.label }} {{ form.term_date(class_="form-control") }}<br/>
+							<p>Patient</p>
+							<select class="form-control" id="patient_id" name="patient_id">
+							
+							<option value="{{ current_auth.patient_id }}">{{ current_patient }}</option>
+								{% for pt in allpts %}
+
+							<option value="{{ pt.id }}">{{ pt.fname }} {{ pt.lname }}</option>
+
+								{% endfor %}
+							</select>
+                           <br/>
+							<p>Status</p>
+							<select class="form-control" name="status" id="status">
+								<option value="{{ current_auth.status }}">{{ current_status }}</option>
+								
+								<option value="Approved">Approved</option>
+								<option value="Denied">Denied</option>
+								<option value="Pending">Pending</option>
+								<option value="Appeal">Appeal</option>
+								<option value="2nd Appeal">2nd Appeal</option>
+								<option value="3rd Party Review">3rd Party Review</option>
+							
+							</select>
+							
+							<br>
+							<p>Assigned To</p>
+                            <select class="form-control" id="user_id" name="user_id">
+							
+							<option value="{{ current_auth.user_id }}">{{ current_assigned_to }}</option>
+							
+								{% for user in all_users %}
+
+							<option value="{{ user.id }}">{{ user.username }} </option>
+
+								{% endfor %}
+							</select>
+							<br>
+							
+
+                            {{ form.notes_init.label }} {{ form.notes_init(class_="form-control") }}<br>
+                            <br />
+                            {{ form.submit(class_="btn btn-success") }}
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <bold class="text-center text-primary">REMEMBER: Many insurance plans will require the submission of clinical notes that support the medical
+                            necessity of the medication. Be sure to include it with all requests for coverage to prevent delay in processing.</bold>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+    #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1cc88a;
+    color: white;
+}
+    .logo-heading {
+        text-align: center;
+        font-weight: bold;
+        color: #1cc88a;
+    }
+</style>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="container">
+    <h2 class="logo-heading">Super Easy PA</h2>
+        <!-- Content Row -->
+    <h3>PA Stats</h3>
+    <hr/>
+    <table id="customers">
+        <tr class="text-light">
+            <th style="background-color: #1cc88a;">Approved</th>
+            <th class="bg-danger">Denied</th>
+            <th class="bg-warning">Pending</th>
+        </tr>
+        <tr style="background-color: #fff;">
+                        <td>{{ allapproved }}</td>
+                        <td>{{ alldenied }}</td>
+                        <td>{{ allpending }}</td>
+        </tr>
+    </table>
+<br/>
+    <h3>Patient List</h3>
+    <hr/>
+    <table id="customers">
+    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>DOB</th>
+                        <th>Insurance</th>
+                        <th>Phone</th>
+    </tr>
+    {% for pt in allpts.items %}
+
+                    <tr style="background-color: #fff;">
+                        <td>{{pt.member_id}}</td>
+                        <td>{{pt.fname}}</td>
+                        <td>{{pt.lname}}</td>
+                        <td>{{pt.dob.strftime('%m-%d-%Y')}}</td>
+                        <td>{{pt.insurance}}</td>
+                        <td>{{ pt.phone }}</td>
+
+                    </tr>
+                    {% endfor %}
+    </table>
+    <br/>
+<footer>
+<h6 class="text-center">Report generated {{ today }} by {{ current_user.username }}</h6>
+</footer>
+
+</body>
+</html>

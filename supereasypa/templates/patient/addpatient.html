@@ -1,0 +1,88 @@
+﻿{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="text-center text-success">
+                            Patient
+                        </h2>
+                      
+                        <form method="POST">
+                            <h3 class="text-primary">Demographics</h3>
+                            <hr />
+                            {{ form.hidden_tag() }}
+                            {{ form.fname.label }} {{ form.fname(class_="form-control") }}<br />
+                            {{ form.lname.label }} {{ form.lname(class_="form-control") }}<br />
+                            {{ form.phone.label }} {{ form.phone(class_="form-control") }}<br />
+                            {{ form.dob.label }} {{ form.dob(class_="form-control") }}<br />
+                            {{ form.allergies.label }} {{ form.allergies(class_="form-control") }}<br />
+                            {{ form.height.label }} {{ form.height(class_="form-control") }}<br />
+                            {{ form.weight.label }} {{ form.weight(class_="form-control") }}<br />
+
+                            <h4 class="text-primary">Address</h4>
+                            {{ form.address.label }} {{ form.address(class_="form-control") }}<br />
+                            {{ form.city.label }} {{ form.city(class_="form-control") }}<br />
+                            {{ form.state.label }} {{ form.state(class_="form-control") }}<br />
+                            {{ form.zip.label }} {{ form.zip(class_="form-control") }}<br />
+                            <h4 class="text-primary">Insurance</h4>
+							{{ form.member_id.label }} {{ form.member_id(class_="form-control") }}<br />
+                        <p>Plan Name</p>
+                         <select name="ins_id" id="ins_id" class="form-control">
+
+						 <option value="{{ patient.ins_id }}">{{insurance_name}}</option>
+			
+						{% for ins in allins %}
+
+						<option value="{{ ins.id }}">{{ ins.name }}</option>
+
+						{% endfor %}
+						</select>
+						<br />
+                            {{ form.ins_eff_date.label }} {{ form.ins_eff_date(class_="form-control") }}<br />
+                            {{ form.ins_term_date.label }} {{ form.ins_term_date(class_="form-control") }}<br />
+                            {{ form.submit(class_="btn btn-success") }}
+							
+							 
+
+<!---
+						 to pull all insurances in the database
+						<select name="name" id="name" class="form-control">
+			
+						{% for ins in allins %}
+
+						<option value="{{ ins.id }}">{{ ins.name }}</option>
+
+						{% endfor %}
+						</select>
+						
+						-->
+
+
+
+
+
+
+
+
+
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <bold class="text-center text-primary">
+                                REMEMBER: Many insurance plans will require the submission of clinical notes that support the medical
+                                necessity of the medication. Be sure to include it with all requests for coverage to prevent delay in processing.
+                            </bold>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+﻿{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="text-center text-success">
+                            Insurance Plan
+                        </h2>
+                        
+                        <form method="POST">
+
+                            {{form.hidden_tag() }}
+                            {{ form.name.label }} {{ form.name(class_="form-control") }}<br />
+                            {{ form.phone.label }} {{ form.phone(class_="form-control") }}
+                            <br />
+                            {{ form.fax.label }} {{ form.fax(class_="form-control") }}
+                            <br />
+                            {{ form.alt_phone.label }} {{ form.alt_phone(class_="form-control") }}
+                            <br />
+                            {{ form.alt_fax.label }} {{ form.alt_fax(class_="form-control") }}
+                            <br />
+                            {{ form.bin.label }} {{ form.bin(class_="form-control") }}<br>
+                            {{ form.pcn.label }} {{ form.pcn(class_="form-control") }}<br>
+                            {{ form.group.label }} {{ form.group(class_="form-control") }}<br>
+
+                            <br />
+                            {{ form.submit(class_="btn btn-success") }}
+
+                        </form>
+                        <hr>
+						
+						<!---
+						 to pull all insurances in the database
+						<select name="name" id="name" class="form-control">
+						<option>Test</option>
+						{% for ins in allins %}
+
+						<option value="{{ ins.id }}">{{ ins.name }}</option>
+
+						{% endfor %}
+						</select>
+						
+						-->
+                        <div class="text-center">
+                            <bold class="text-center text-primary">
+                                REMEMBER: Many insurance plans will require the submission of clinical notes that support the medical
+                                necessity of the medication. Be sure to include it with all requests for coverage to prevent delay in processing.
+                            </bold>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

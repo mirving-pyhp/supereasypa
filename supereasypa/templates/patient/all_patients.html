@@ -1,0 +1,60 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success">Patients</h2>
+         <a href="{{ url_for('patient.printing') }}" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <br/><br/>
+        
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>DOB</th>
+                        <th>Insurance</th>
+                        <th>Phone</th>
+                        
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pt in allpts.items %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('patient.viewpatient', patient_id=pt.id) }}">{{pt.member_id}}</a></td>
+                        <td>{{pt.fname}}</td>
+                        <td>{{pt.lname}}</td>                    
+                        <td>{{pt.dob.strftime('%m-%d-%Y')}}</td>                    
+                        <td>{{pt.insurance}}</td>
+                        <td>{{ pt.phone }}</td>
+                        
+                    </tr>
+                    {% endfor %}
+                        
+                </tbody>
+            </table>
+ <!--<nav aria-label="Page navigation example">
+     <ul class="pagination justify-content-center">
+       {% for page_num in allpts.iter_pages(left_edge=20, right_edge=20, left_current=20, right_current=20) %}
+          {% if allpts.page == page_num %}
+          <li class="page-item disabled">
+            <a class="page-link" href="{{ url_for('patient.allpatients', page=page_num) }}">{{ page_num }}</a></li>
+          </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="{{ url_for('patient.allpatients', page=page_num) }}">{{ page_num }}</a></li>
+          {% endif %}
+      {% endfor %}
+    </nav>-->
+            
+
+        </div>
+
+		</div>
+	</div>
+	
+   </div>     
+   <br/>
+{% endblock %}

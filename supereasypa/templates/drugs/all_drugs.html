@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success">Drugs</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Strength</th>
+                        <th>Dosage Form</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for drug in alldrugs.items %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('drug.viewdrug', drug_id=drug.id) }}">{{drug.name}}</a> </td>
+                        <td>{{drug.drug_class}}</td>
+                        <td>{{drug.strength}} {{ drug.measurement }}</td>
+                        <td>{{drug.dosage_form}}</td>
+
+                    </tr>
+                    {% endfor %}
+                      
+                </tbody>
+				
+            </table>
+			
+
+        </div>
+
+		</div>
+	</div>
+   </div>   
+  <br/> 
+{% endblock %}

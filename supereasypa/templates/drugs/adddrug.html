@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% block content %}
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="p-5">
+                        <h2 class="text-center text-success">
+                            Drug</h2>
+                            <div class="text-center">
+                                <i class="fa fa-pills fa-3x text-success"></i>
+             
+                    </div>
+                        <form method="POST">
+                            {{ form.hidden_tag() }}
+                        <br/>
+                           {{ form.name.label }} {{ form.name(class_="form-control") }}
+                            <br />
+                            {{ form.strength.label }} {{ form.strength(class_="form-control") }}
+                            <br />
+                            <p>Unit Of Measurement</p>
+                            <select name="measurement" id="measurement" class="form-control">
+                                <option value="MG">MG</option>
+                                <option value="MCG">MCG</option>
+                                <option value="G">G</option>
+
+                            </select>
+                            <br/>
+                            <p>Dosage Form</p>
+                            <select name="dosage_form" id="dosage_form" class="form-control">
+                                <option value="Tablet">Tablet</option>
+                                <option value="Capsule">Capsule</option>
+                                <option value="Ointment">Ointment</option>
+                                <option value="Syringe">Syringe</option>
+                                <option value="Gel">Gel</option>
+                                <option value="Shampoo">Shampoo</option>
+
+                            </select>
+                            <br/>
+                            {{ form.cost.label }} {{ form.cost(class_="form-control") }}
+                            <br />
+                            {{ form.drug_class.label }} {{ form.drug_class(class_="form-control") }}
+                            <br />
+                            {{ form.submit(class_="btn btn-success") }}
+                        </form>
+                        <hr>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

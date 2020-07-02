@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center text-success">M.A.P</h2>
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="table-responsive">
+            <table id="dataTable" class="table table-bordered table-hover ">
+                <thead class="bg-success text-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Mnfctr</th>
+                        <th>Drug</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for map in all_map %}
+                    <tr style="background-color: #fff;">
+                        <td><a href="{{ url_for('map.viewmap', map_id=map.id) }}">{{map.name}}</a> </td>
+                        <td>{{map.manufacturer}}</td>
+
+                        <td>{{map.drug_name}}</td>
+
+                    </tr>
+                    {% endfor %}
+                      
+                </tbody>
+				
+            </table>
+			
+
+        </div>
+
+		</div>
+	</div>
+   </div>   
+  <br/> 
+{% endblock %}
