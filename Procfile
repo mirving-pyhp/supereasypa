@@ -1,1 +1,1 @@
-web: gunicorn supereasypa:heroku_only
+web: gunicorn --bind 0.0.0.0:$PORT supereasypa:app
