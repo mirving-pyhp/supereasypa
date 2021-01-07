@@ -60,7 +60,7 @@ jupyter-client==6.1.2
 jupyter-console==6.1.0
 jupyter-core==4.6.3
 lazy-object-proxy==1.4.3
-lxml==4.5.0
+lxml==4.6.2
 Mako==1.0.7
 MarkupSafe==1.0
 marshmallow==3.6.0
